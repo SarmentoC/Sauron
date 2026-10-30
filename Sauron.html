@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sauron · Nutrição e Crescimento</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./Sauron.css">
+</head>
+
+<body>
+  <!-- Símbolo partilhado -->
+  <svg
+    class="royal-symbol-library"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <defs>
+      <symbol id="royal-eye" viewBox="0 0 80 110">
+        <image
+            href="./sauron-eye.png"
+            x="0"
+            y="0"
+            width="80"
+            height="110"
+            preserveAspectRatio="xMidYMid meet"
+        />
+        </symbol>
+    </defs>
+  </svg>
+
+  <div class="app-shell">
+
+    <!-- MENU LATERAL -->
+    <aside class="royal-sidebar" aria-label="Menu do Sauron">
+      <div class="royal-brand">
+        <svg
+            class="royal-emblem"
+            viewBox="0 0 80 110"
+            aria-hidden="true"
+        >
+            <use href="#royal-eye"></use>
+        </svg>
+
+        <div class="royal-brand-name">SAURON</div>
+        </div>
+
+      <nav class="royal-nav" aria-label="Navegação principal">
+        <button
+          type="button"
+          data-tab="plan"
+          class="active"
+          aria-pressed="true"
+        >
+          <span aria-hidden="true">♜</span>
+          Plano diário
+        </button>
+
+        <button
+          type="button"
+          data-tab="growth"
+          aria-pressed="false"
+        >
+          <span aria-hidden="true">↗</span>
+          Crescimento
+        </button>
+
+        <button
+          type="button"
+          data-tab="foods"
+          aria-pressed="false"
+        >
+          <span aria-hidden="true">🍽</span>
+          Alimentos
+        </button>
+        <button
+            type="button"
+            data-tab="training"
+            aria-pressed="false"
+            >
+            <svg
+            class="nav-puzzle"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            >
+            <path d="
+                M20 13h-2v7a1 1 0 0 1-1 1h-4v-2
+                a2 2 0 0 0-4 0v2H4a1 1 0 0 1-1-1v-5h2
+                a2 2 0 0 0 0-4H3V6a1 1 0 0 1 1-1h5V3
+                a2 2 0 0 1 4 0v2h4a1 1 0 0 1 1 1v3h2
+                a2 2 0 0 1 0 4Z
+            "/>
+            </svg>
+            Treinos
+            </button>
+
+        <button
+          type="button"
+          data-tab="health"
+          aria-pressed="false"
+        >
+          <svg class="nav-puzzle" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+          </svg>
+          Saúde
+        </button>
+      </nav>
+
+      <div class="royal-sidebar-scene">
+        <img
+          src="./vertical-banner.png"
+          alt="Um gato contempla uma torre numa paisagem vulcânica"
+        >
+
+      </div>
+
+      <p class="royal-live">
+        <span id="ageWeeks">—</span>
+        ·
+        <span id="weightTop">—</span>
+      </p>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="app-main">
+
+      <header class="hero royal-hero" id="mainHero">
+        <div class="royal-heading">
+          <img
+            id="headerEye"
+            src="./sauron-eye.png"
+            alt=""
+            aria-hidden="true"
+            >
+
+          <h1>Sauron</h1>
+
+          <div class="royal-subtitle">
+            Lord of Mordor 
+          </div>
+
+        </div>
+
+        <div class="royal-details">
+          <div class="royal-badge">
+            <span class="royal-badge-icon" aria-hidden="true">▦</span>
+
+            <div>
+              <small>NASCIDO A</small>
+              <strong>18 JUL 2026</strong>
+            </div>
+          </div>
+
+          <div class="royal-badge">
+            <span class="royal-badge-icon" aria-hidden="true">⌛</span>
+
+            <div>
+              <strong id="ageTop">—</strong>
+              <small id="weeksTop">—</small>
+            </div>
+          </div>
+        </div>
+
+      </header>
+
+      <p id="appStatus" class="note" role="status"></p>
+
+      <!-- PÁGINA: PLANO -->
+      <div class="view plan-grid" data-view="plan" id="view-plan">
+
+        <section class="card" id="planSettings">
+          <h2>Plano diário</h2>
+
+          <p class="hint">
+            Ajusta o peso, o fator energético ou uma meta manual.
+          </p>
+
+          <div class="row">
+            <label for="weightInput">Peso atual</label>
+
+            <span>
+              <input
+                type="number"
+                id="weightInput"
+                min="0.5"
+                max="12"
+                step="0.1"
+                value="2.3"
+              >
+              kg
+            </span>
+          </div>
+
+          <input
+            type="range"
+            id="weight"
+            aria-label="Peso atual em quilogramas"
+            min="0.5"
+            max="12"
+            step="0.1"
+            value="2.3"
+          >
+
+          <div class="ends">
+            <span>0,5 kg</span>
+            <span>12 kg</span>
+          </div>
+
+          <label for="factor">Fator energético</label>
+
+         <select id="factor">
+        <option value="auto">Automático por idade · estimativa</option>
+
+        <option value="3">3,0 × RER · Crescimento rápido / ajuste manual</option>
+        <option value="2.7">2,7 × RER</option>
+        <option value="2.5">2,5 × RER · Até aos 4 meses</option>
+        <option value="2.25">2,25 × RER · Dos 4 aos 6 meses</option>
+        <option value="2.2">2,2 × RER</option>
+        <option value="2">2,0 × RER · Dos 6 aos 9 meses</option>
+        <option value="1.8">1,8 × RER</option>
+        <option value="1.75">1,75 × RER · Dos 9 aos 12 meses</option>
+        <option value="1.6">1,6 × RER · 12–18 meses</option>
+        <option value="1.4">1,4 × RER · 18–24 meses / adulto ativo</option>
+        <option value="1.2">1,2 × RER · Adulto esterilizado (manutenção)</option>
+        </select>
+
+          <div class="row">
+            <label for="customCal">Meta manual · kcal/dia</label>
+            <input
+              type="number"
+              id="customCal"
+              min="1"
+              step="any"
+              placeholder="Auto"
+            >
+          </div>
+
+        
+
+          <div class="box">
+            <div class="lab">Meta energética estimada</div>
+
+            <div class="big">
+              <span id="goalCalories">—</span>
+              <small>kcal/dia</small>
+            </div>
+          </div>
+
+          <p id="factorInfo" class="hint"></p>
+
+          <details>
+            <summary>Como é calculada a energia?</summary>
+            <p class="note">
+              RER = 70 × peso em kg elevado a 0,75.
+              O modo automático aplica os fatores indicativos
+              da v3 conforme a idade. A meta manual substitui
+              esse cálculo. Ajusta o plano com o veterinário.
+            </p>
+          </details>
+        </section>
+
+        <section class="card" id="planFood">
+          <h2>Alimentos do plano</h2>
+
+          <label for="wetType">Comida húmida</label>
+          <select id="wetType"></select>
+
+          <div class="row">
+            <label for="wet">Quantidade de húmida</label>
+            <span class="big" id="wetLabel">85 g</span>
+          </div>
+
+          <input
+            type="range"
+            id="wet"
+            min="0"
+            max="400"
+            step="5"
+            value="85"
+          >
+
+          <div class="ends">
+        <span>0 g</span>
+        <span id="wetMaxLabel">—</span>
+        </div>
+
+          <label for="dryType">Ração seca</label>
+          <select id="dryType"></select>
+
+          <p class="hint">
+            A seca completa a meta calórica depois de contabilizar
+            a comida húmida e os snacks planeados.
+            Extras registados são acrescentados aos totais.
+          </p>
+
+          <div class="grid">
+            <div class="box">
+              <div class="lab">Comida húmida</div>
+
+              <div class="big">
+                <span id="wetGrams">—</span>
+                <small>g/dia</small>
+              </div>
+
+              <div id="wetEnergy" class="lab">—</div>
+              <p id="wetName" class="note"></p>
+            </div>
+
+            <div class="box">
+              <div class="lab">Ração seca calculada</div>
+
+              <div class="big">
+                <span id="dryGrams">—</span>
+                <small>g/dia</small>
+              </div>
+
+              <div id="dryEnergy" class="lab">—</div>
+              <p id="dryName" class="note"></p>
+            </div>
+          </div>
+
+          <div class="bar" aria-hidden="true">
+            <i id="wetBar"></i>
+            <i id="dryBar"></i>
+            <i id="snackBar"></i>
+            </div>
+
+            <div class="ends">
+            <span>
+                <span style="color: var(--fire)">●</span>
+                Húmida <b id="wetPercent">—</b>
+            </span>
+
+            <span>
+                <span style="color: var(--gold2)">●</span>
+                Seca <b id="dryPercent">—</b>
+            </span>
+
+            <span>
+                <span style="color: #88a879">●</span>
+                Snacks <b id="snackPercent">—</b>
+            </span>
+            </div>
+
+        
+        </section>
+
+        <div class="royal-divider">
+        <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false">
+            <use href="#royal-eye"></use>
+            </svg>
+        </span>
+
+        <p class="royal-divider-title">
+            Valores nutricionais diários
+        </p>
+
+        <p class="royal-divider-subtitle">
+            Referências e equilíbrio nutricional
+        </p>
+        </div>
+
+        <section class="card" id="planReference" aria-labelledby="referenceTitle">
+          <div class="panel-heading">
+            <h2 id="referenceTitle">Referência nutricional</h2>
+          </div>
+          <p id="referenceSummary" class="hint"></p>
+          <label for="nutrientProfile">Perfil nutricional</label>
+          <select id="nutrientProfile">
+            <option value="auto">Automático · crescimento até 12 meses</option>
+            <option value="growth">Crescimento · seleção manual</option>
+            <option value="adult75">Adulto · menor necessidade energética (75)</option>
+            <option value="adult100">Adulto · necessidade energética padrão (100)</option>
+          </select>
+          <p id="profileNote" class="note"></p>
+          <div class="scroll">
+            <table class="nutrition-table reference-table">
+              <caption>Equivalentes diários para a meta energética selecionada</caption>
+              <thead><tr><th scope="col">Nutriente</th><th scope="col">Referência / dia</th></tr></thead>
+              <tbody id="referenceRows"></tbody>
+            </table>
+          </div>
+          <p class="note">
+            A referência de taurina usa a meta energética diária
+            e a proporção de calorias de seca, húmida e snacks.
+            Reduzir todas as porções na mesma proporção não reduz
+            esta referência. Valores parciais ou estimados não
+            permitem confirmar a suficiência da dieta.
+            </p>
+          <details class="reference-method">
+            <summary>Base e limites desta referência</summary>
+            <p class="note">Os nutrientes são calculados a partir dos níveis mínimos recomendados pela FEDIAF por 1000 kcal e da meta energética escolhida. São equivalentes calculados para comparação, não uma prescrição individual nem metas máximas.</p>
+            <p class="note">A meta energética mantém os fatores indicativos da app. Esses fatores não são apresentados como recomendações FEDIAF. Não é aplicado um multiplicador extra por raça. A fase de crescimento de um Maine Coon deve ser revista individualmente; os 12 meses são apenas a regra automática desta app.</p>
+            <p class="note">Nos perfis adultos, 75 e 100 identificam as colunas FEDIAF de necessidade energética em kcal/kg de peso elevado a 0,67; não são doses diárias fixas. A seleção do perfil não altera a meta energética.</p>
+            <p class="note">
+  <strong>Porque varia a referência de taurina?</strong><br>
+  A FEDIAF distingue alimentos secos de húmidos enlatados.
+  No perfil de crescimento, recomenda pelo menos
+  250 mg por 1.000 kcal nos secos e
+  630 mg por 1.000 kcal nos enlatados.
+  São níveis para formulação de alimentos completos,
+  não doses diárias fixas específicas para Maine Coons.
+</p>
+
+<p class="note">
+  A referência superior nos enlatados está relacionada
+  com efeitos do processamento e da digestão sobre
+  a disponibilidade da taurina, não apenas com
+  a quantidade de água do alimento.
+</p>
+
+<p class="note">
+  <strong>Como calculamos a mistura?</strong><br>
+  A app pondera as referências pelas calorias de cada
+  formato e aplica o resultado à meta energética diária.
+  Esta ponderação é uma aproximação da app, não uma
+  fórmula individual validada pela FEDIAF.
+  Os snacks entram conforme o formato registado.
+</p>
+
+<p class="note">
+  Se não existirem porções com calorias válidas,
+  usamos provisoriamente a maior referência do perfil.
+  Um formato desconhecido também usa a referência
+  da húmida. Estas são escolhas prudenciais da app,
+  não recomendações adicionais da FEDIAF.
+</p>
+
+<p class="note">
+  <strong>Referência não significa consumo confirmado.</strong><br>
+  A taurina adicionada indicada nos aditivos não corresponde
+  necessariamente à taurina total do alimento.
+  Quando faltam dados ou existe uma estimativa de taurina
+  natural, a comparação mantém essa incerteza.
+</p>
+
+<p class="note">
+  <a
+    href="https://europeanpetfood.org/wp-content/uploads/2025/09/FEDIAF-Nutritional-Guidelines_2025-ONLINE.pdf#page=60"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Porque diferem os formatos? FEDIAF 2025 · secção 7.3,
+    página 60
+  </a>
+</p>
+            <p class="note"><a href="https://europeanpetfood.org/wp-content/uploads/2025/09/FEDIAF-Nutritional-Guidelines_2025-ONLINE.pdf" target="_blank" rel="noopener noreferrer">Fonte: FEDIAF 2025 · tabela III-4b, página 19</a></p>
+          </details>
+        </section>
+
+        <section class="card" id="planNutrients" aria-labelledby="intakeTitle">
+          <div class="panel-heading">
+            <h2 id="intakeTitle">Aporte diário calculado</h2>
+          </div>
+          <p class="hint">Valores de nutrientes estimados com base no planeamento diário da alimentação húmida e seca do Sauron.</p>
+          <div class="scroll">
+            <table class="nutrition-table intake-table">
+              <caption>Aporte do plano e comparação numérica</caption>
+              <thead><tr><th scope="col">Nutriente</th><th scope="col">Aporte / dia</th><th scope="col">Leitura</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Energia</th><td><b id="calories">—</b> kcal</td><td id="checkEnergy">—</td></tr>
+                <tr><th scope="row">Proteína</th><td><b id="protein">—</b> g</td><td id="checkProtein">—</td></tr>
+                <tr><th scope="row">Gordura</th><td><b id="fat">—</b> g</td><td id="checkFat">—</td></tr>
+                <tr><th scope="row">Taurina</th><td><b id="taurine">—</b> mg</td><td id="checkTaurine">—</td></tr>
+                <tr><th scope="row">Água da comida</th><td><b id="water">—</b> ml aprox.</td><td id="checkWater">Sem comparação</td></tr>
+                <tr><th scope="row">Cálcio</th><td><b id="calcium">—</b> g</td><td id="checkCalcium">—</td></tr>
+                <tr><th scope="row">Fósforo</th><td><b id="phosphorus">—</b> g</td><td id="checkPhosphorus">—</td></tr>
+                <tr><th scope="row">Rácio Ca:P</th><td><b id="ratio">—</b></td><td id="checkRatio">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="box total">
+            <div class="lab">TOTAL DO PLANO DIÁRIO</div>
+            <div class="big"><span id="totalGrams">—</span> g · <span id="totalCalories">—</span> kcal</div>
+          </div>
+          <details class="reference-method">
+        <summary>Notas e limites dos valores calculados</summary>
+
+        <p class="note nutrition-legend">
+            * inclui estimativas. “Parcial” significa que faltam dados;
+            não equivale a uma carência. A comparação não avalia todos
+            os nutrientes nem valida a dieta completa.
+        </p>
+
+        <p id="notice" class="note" role="status"></p>
+        </details>
+                    <button type="button" id="savePlan">Guardar plano de hoje</button>
+        </section>
+
+        <div class="royal-divider" id="snackDivider">
+  <span class="royal-divider-mark" aria-hidden="true">
+    <svg viewBox="0 0 80 110" focusable="false">
+      <use href="#royal-eye"></use>
+    </svg>
+  </span>
+
+  <p class="royal-divider-title">
+    Snacks e recompensas
+  </p>
+
+  <p class="royal-divider-subtitle">
+    Incluídos nas contas do dia
+  </p>
+</div>
+
+        <section class="card full" id="planSnacks"
+                 aria-labelledby="snacksTitle">
+          <h2 id="snacksTitle">Snacks de hoje</h2>
+
+          <p class="hint">
+            Cria os snacks na biblioteca de alimentos e adiciona aqui
+            a quantidade em gramas.
+          </p>
+
+          <form id="snackForm">
+            <div>
+                <label for="snackFood">Snack</label>
+                <select id="snackFood" required></select>
+            </div>
+
+            <div>
+                <label for="snackGrams">Quantidade · g</label>
+                <input
+                id="snackGrams"
+                type="number"
+                min="0.1"
+                max="1000"
+                step="any"
+                value="1"
+                required
+                >
+            </div>
+
+            <button type="submit" id="addSnackButton">
+                + Adicionar snack
+            </button>
+            </form>
+
+            <div class="scroll snack-table">
+            <table>
+                <thead>
+                <tr>
+                    <th>Snack</th>
+                    <th>Quantidade</th>
+                    <th>Energia</th>
+                    <th>Registo</th>
+                    <th>Ação</th>
+                </tr>
+                </thead>
+                <tbody id="snackRows"></tbody>
+            </table>
+            </div>
+
+            <p id="snackSummary" class="note" aria-live="polite"></p>
+        </section>
+
+        <!-- SEPARADOR: HIDRATAÇÃO -->
+        <div class="royal-divider" id="hydrationDivider">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false">
+              <use href="#royal-eye"></use>
+            </svg>
+          </span>
+
+          <h2 class="royal-divider-title">
+            Hidratação
+          </h2>
+
+        </div>
+
+        <section class="card full" id="hydrationPanel"
+         aria-labelledby="hydrationTitle">
+            <h2 id="hydrationTitle">Água do dia</h2>
+
+            <label for="waterDrunk">Água bebida hoje · ml</label>
+
+            <div class="water-input-row">
+            <input
+                id="waterSlider"
+                type="range"
+                min="0"
+                max="500"
+                step="1"
+                value="0"
+                aria-label="Quantidade de água bebida em mililitros"
+                >
+
+                <input
+                    id="waterDrunk"
+                    type="number"
+                    min="0"
+                    step="any"
+                    placeholder="Não medido"
+                >
+                </div>
+
+                <div class="ends">
+                <span id="waterSliderValue">Não medido</span>
+                <span id="waterSliderMax">500 ml</span>
+                </div>
+
+            <p class="note">
+                Introduz o total acumulado de hoje, sem incluir a água dos alimentos.
+                Deixa vazio se não mediste; zero significa que registaste 0 ml.
+            </p>
+
+            <div class="hydration-stats">
+                <div class="box">
+                <div class="lab">Água estimada dos alimentos</div>
+                <div class="big" id="hydrationFood">—</div>
+                </div>
+
+                <div class="box total">
+                <div class="lab">Bebida + alimentos</div>
+                <div class="big" id="hydrationTotal">—</div>
+                </div>
+
+                <div class="box">
+                <div class="lab">Intervalo de referência</div>
+                <div class="big" id="hydrationReference">—</div>
+                </div>
+            </div>
+
+            <p id="hydrationStatus"
+                class="hydration-status"
+                role="status"
+                aria-live="polite">—</p>
+
+            <p class="note">
+                Comparação estimada com base no registo disponível e nas porções
+                planeadas de seca, húmida e snacks. Durante o dia, o total ainda
+                pode estar incompleto. * inclui estimativas.
+            </p>
+
+            <details class="reference-method">
+                <summary>Referência e ajustes</summary>
+
+                <p id="hydrationBasis" class="note"></p>
+
+                <p class="note">
+                Se tiveres um intervalo individual indicado pelo veterinário,
+                preenche os dois limites abaixo em ml/dia.
+                Deixa ambos vazios para usar a referência geral.
+                </p>
+
+                <div class="grid">
+                <div>
+                    <label for="waterRefLow">Limite inferior · ml/dia</label>
+                    <input
+                    id="waterRefLow"
+                    type="number"
+                    min="0.1"
+                    step="any"
+                    placeholder="Automático"
+                    >
+                </div>
+
+                <div>
+                    <label for="waterRefHigh">Limite superior · ml/dia</label>
+                    <input
+                    id="waterRefHigh"
+                    type="number"
+                    min="0.1"
+                    step="any"
+                    placeholder="Automático"
+                    >
+                </div>
+                </div>
+
+                <p class="note">
+                Esta comparação não diagnostica desidratação.
+                “Acima da referência” não significa que devas restringir a água.
+                O intervalo personalizado mantém-se até o alterares.
+                </p>
+
+                <p class="note">
+                <a
+                    href="https://www.msdvetmanual.com/management-and-nutrition/nutrition-small-animals/nutritional-requirements-of-small-animals"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >Fonte: MSD Veterinary Manual · Água</a>
+                </p>
+            </details>
+    </section>
+      </div>
+
+      <!-- PÁGINA: ALIMENTOS -->
+      <div
+        class="view foods-grid"
+        data-view="foods"
+        id="view-foods"
+        hidden
+      >
+      <header class="training-hero food-hero full">
+        <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
+
+        <h1>O Banquete de Sauron</h1>
+
+        <div class="training-title-divider" aria-hidden="true">
+          <span></span>
+        </div>
+
+        <p>"One bowl to rule them all."</p>
+      </header>
+
+        <section class="card full">
+          <h2>Biblioteca de alimentos</h2>
+
+          <p class="hint">
+            Valores por porção: 85 g para comida húmida,
+            100 g para ração seca e 1 g para snacks.
+            * indica valores estimados.
+            Campos vazios significam desconhecido, não zero.
+            A proteína é apresentada em g e a taurina em mg por porção.
+            </p>
+
+          <button type="button" id="addFood">+ Novo alimento</button>
+
+          <div class="scroll">
+            <table>
+              <thead>
+                <tr>
+                    <th>Alimento</th>
+                    <th>Tipo</th>
+                    <th>Porção</th>
+                    <th>Energia</th>
+                    <th>Proteína</th>
+                    <th>Taurina declarada</th>
+                    <th>Taurina natural</th>
+                    <th>Taurina total</th>
+                    <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="foodRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card full" id="foodEditor" hidden>
+          <h2 id="editorTitle">Adicionar alimento</h2>
+
+          <form id="foodForm">
+            <div class="grid">
+              <div>
+                <label for="fName">Nome</label>
+                <input id="fName" type="text" required>
+              </div>
+
+              <div>
+                <label for="fType">Tipo</label>
+                <select id="fType">
+                  <option value="wet">Húmida</option>
+                  <option value="dry">Seca</option>
+                  <option value="snack">Snack</option>
+                </select>
+              </div>
+
+              <div id="snackFormatField" hidden>
+                <label for="fSnackFormat">Formato do snack</label>
+                <select id="fSnackFormat">
+                    <option value="dry">Seco</option>
+                    <option value="wet">Húmido / cremoso</option>
+                </select>
+                <p class="note">
+                    Usado na referência estimada de taurina.
+                </p>
+                </div>
+
+              <div>
+                <label for="fKcal">Energia · kcal/100 g</label>
+                <input id="fKcal" type="number" min="0.01" step="any" required>
+              </div>
+
+              <div>
+                <label for="fProtein">Proteína · %</label>
+                <input id="fProtein" type="number" min="0" max="100" step="any" required>
+              </div>
+
+              <div>
+                <label for="fFat">Gordura · %</label>
+                <input id="fFat" type="number" min="0" max="100" step="any" required>
+              </div>
+
+              <div>
+                <label for="fMoisture">Humidade · %</label>
+                <input id="fMoisture" type="number" min="0" max="100" step="any" required>
+              </div>
+
+              <div>
+                <label for="fTaurineDeclared">
+                    Taurina declarada · mg/kg
+                </label>
+
+                <input
+                    id="fTaurineDeclared"
+                    type="number"
+                    min="0"
+                    step="any"
+                    placeholder="Valor indicado no rótulo"
+                >
+                </div>
+
+                <div>
+                <label for="fTaurineKind">
+                    O valor declarado corresponde a…
+                </label>
+
+                <select id="fTaurineKind">
+                    <option value="added">Taurina adicionada</option>
+                    <option value="total">Taurina total</option>
+                </select>
+                </div>
+
+                <div>
+                <label for="fTaurineNatural">
+                    Taurina natural estimada · mg/kg *
+                </label>
+
+                <input
+                    id="fTaurineNatural"
+                    type="number"
+                    min="0"
+                    step="any"
+                    placeholder="Desconhecida"
+                >
+                </div>
+
+                <div>
+                <label for="fTaurine">
+                    Taurina total calculada · mg/kg
+                </label>
+
+                <input
+                    id="fTaurine"
+                    type="text"
+                    readonly
+                    placeholder="—"
+                >
+                </div>
+
+              <div>
+                <label for="fCalcium">Cálcio · %</label>
+                <input id="fCalcium" type="number" min="0" max="100" step="any" placeholder="Desconhecido">
+              </div>
+
+              <div>
+                <label for="fPhosphorus">Fósforo · %</label>
+                <input id="fPhosphorus" type="number" min="0" max="100" step="any" placeholder="Desconhecido">
+              </div>
+
+              <div>
+                <label for="fStatus">Origem dos dados</label>
+                <select id="fStatus">
+                  <option value="estimated">Estimados</option>
+                  <option value="label">Rótulo</option>
+                </select>
+              </div>
+
+              <div class="full">
+                <label for="fUrl">Link da loja · opcional</label>
+                <input id="fUrl" type="url" maxlength="500" placeholder="https://...">
+              </div>
+            </div>
+
+            <p class="note">
+                Assinala “Estimado” em cada valor que não venha do rótulo.
+                A taurina natural é sempre tratada como estimativa.
+                Quando o valor declarado corresponde à taurina adicionada,
+                o total resulta da soma das duas parcelas.
+                Se faltar uma parcela, o resultado aparece como parcial.
+                Esta versão ainda não calcula taurina a partir dos ingredientes.
+                </p>
+
+            <button type="submit">Guardar alimento</button>
+            <button type="button" id="cancelFood">Cancelar</button>
+          </form>
+        </section>
+      </div>
+
+      <!-- PÁGINA: CRESCIMENTO -->
+      <div
+        class="view growth-grid"
+        data-view="growth"
+        id="view-growth"
+        hidden
+      >
+        <header class="training-hero growth-hero full" aria-labelledby="growthTitle">
+          <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
+          <h1 id="growthTitle">A Ascensão de Sauron</h1>
+          <div class="training-title-divider" aria-hidden="true"><span></span></div>
+          <p>"A great power shall rise."</p>
+        </header>
+
+        <section class="card">
+          <h2>Diário de crescimento</h2>
+
+          <form id="weightForm">
+            <label for="logDate">Data da pesagem</label>
+            <input id="logDate" type="date" required>
+
+            <label for="logWeight">Peso medido · kg</label>
+            <input
+              id="logWeight"
+              type="number"
+              min="0.1"
+              max="20"
+              step="any"
+              required
+            >
+
+            <button type="submit">Registar peso</button>
+          </form>
+
+          <p class="note">
+            Os dados ficam neste navegador e não são
+            sincronizados automaticamente com outros dispositivos.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Evolução do peso</h2>
+          <div class="chart-filters" id="chartFilters">
+            <button type="button" data-range="1m">1 mês</button>
+            <button type="button" data-range="6m">6 meses</button>
+            <button type="button" data-range="1y">1 ano</button>
+            <button type="button" data-range="all" class="active">Tudo</button>
+          </div>
+          <div id="chartArea"></div>
+
+
+        </section>
+
+        <section class="card full">
+          <h2>Histórico de pesagens</h2>
+
+          <div class="scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Peso</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="weightRows"></tbody>
+            </table>
+          </div>
+
+          <h2>Planos guardados</h2>
+
+          <div class="scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Peso</th>
+                  <th>Húmida</th>
+                  <th>Seca</th>
+                  <th>Energia</th>
+                </tr>
+              </thead>
+              <tbody id="planRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- PÁGINA: TREINOS -->
+      <div class="view training-view" data-view="training" id="view-training" hidden>
+        <header class="training-hero" aria-labelledby="trainingTitle">
+          <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
+          <h1><span class="training-initial">T</span>reinos do <span class="training-initial">S</span>auron</h1>
+
+        <div class="training-title-divider" aria-hidden="true">
+        <span></span>
+        </div>
+
+        <p>"Let all Middle-earth witness his rise."</p>
+        </header>
+
+        <div class="training-stats" aria-label="Resumo dos treinos">
+  <div class="box">
+    <img
+      class="training-status-image"
+      src="./treinos-categoria/em-aprendizagem.png"
+      alt=""
+    >
+    <div>
+      <b id="trainingLearningCount">0</b>
+      <small>Em aprendizagem</small>
+    </div>
+  </div>
+
+  <div class="box">
+    <img
+      class="training-status-image"
+      src="./treinos-categoria/dominado.png"
+      alt=""
+    >
+    <div>
+      <b id="trainingMasteredCount">0</b>
+      <small>Dominados · nível 5</small>
+    </div>
+  </div>
+
+  <div class="box">
+    <img
+      class="training-status-image"
+      src="./treinos-categoria/por-comecar.png"
+      alt=""
+    >
+    <div>
+      <b id="trainingPlannedCount">0</b>
+      <small>Por começar</small>
+    </div>
+  </div>
+</div>
+
+        <div class="training-toolbar">
+          <div class="training-filters" role="group" aria-label="Filtrar truques">
+            <button type="button" data-training-filter="all" aria-pressed="true" class="active">Todos</button>
+            <button type="button" data-training-filter="planned" aria-pressed="false">Por começar</button>
+            <button type="button" data-training-filter="learning" aria-pressed="false">Em aprendizagem</button>
+            <button type="button" data-training-filter="mastered" aria-pressed="false">Dominados</button>
+            <button type="button" data-training-filter="archived" aria-pressed="false">Arquivados</button>
+          </div>
+          <button type="button" id="newTrickButton">+ Novo truque</button>
+        </div>
+
+        <div class="training-layout">
+          <div id="trainingCards" class="training-cards" aria-label="Truques do Sauron"></div>
+
+          <aside class="training-journal" aria-label="Registo de sessões">
+            <section class="card">
+              <h2 id="trainingSessionTitle">Sessão de treino</h2>
+              <form id="trainingSessionForm">
+                <label for="trainingTrick">Truque selecionado</label>
+                <select id="trainingTrick" required></select>
+
+                <div class="training-fields">
+                  <div><label for="trainingDate">Data</label><input id="trainingDate" type="date" required></div>
+                  <fieldset class="training-duration">
+                    <legend>Duração · min : seg</legend>
+                    <div class="training-duration-inputs">
+                      <input id="trainingMinutes" aria-label="Minutos" type="number" min="0" max="240" step="1" value="3" required>
+                      <span aria-hidden="true">:</span>
+                      <input id="trainingSeconds" aria-label="Segundos" type="number" min="0" max="59" step="1" value="0" required>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div class="training-attempts">
+                  <div><label for="trainingAttempts">Tentativas</label><input id="trainingAttempts" type="number" min="1" max="999" step="1" value="5" required></div>
+                  <div><label for="trainingIndependent">Ao sinal</label><input id="trainingIndependent" type="number" min="0" max="999" step="1" value="0" required></div>
+                  <div><label for="trainingAssisted">Guiadas</label><input id="trainingAssisted" type="number" min="0" max="999" step="1" value="0" required></div>
+                </div>
+                <p id="trainingAttemptHint" class="note" aria-live="polite"></p>
+                <p class="note">Ao sinal: respondeu à palavra ou gesto combinado. <br />
+                    Guiada: seguiu um snack ou outro incentivo. <br /><br />
+                    Dar uma recompensa depois não torna a execução guiada.</p>
+                <fieldset class="training-methods">
+                  <legend>Nesta sessão</legend>
+                  <label class="source-toggle"><input id="trainingUsedClicker" type="checkbox">Usámos clicker</label>
+                  <label class="source-toggle"><input id="trainingUsedFood" type="checkbox">Demos recompensa alimentar</label>
+                  <p id="trainingMethodHint" class="note"></p>
+                </fieldset>
+
+                <label for="trainingContext">Contexto</label>
+                <input id="trainingContext" type="text" maxlength="100" placeholder="Ex.: sala tranquila, corredor, com distrações">
+
+                <label for="trainingRewardFood">Recompensa · opcional</label>
+                <select id="trainingRewardFood"><option value="">Sem snack registado</option></select>
+                <label for="trainingRewardGrams">Quantidade da recompensa · g</label>
+                <input id="trainingRewardGrams" type="number" min="0.1" max="1000" step="any" placeholder="Ex.: 2" disabled>
+
+                <label class="source-toggle training-reward-toggle">
+                  <input id="trainingRewardToDiary" type="checkbox" disabled>
+                  Adicionar como extra aos snacks de hoje
+                </label>
+                <p id="trainingRewardHint" class="note">Assinala apenas se esta recompensa ainda não estiver contabilizada no plano diário.</p>
+
+                <label for="trainingSessionNotes">Notas · opcional</label>
+                <textarea id="trainingSessionNotes" rows="2" maxlength="600" placeholder="O que resultou nesta sessão?"></textarea>
+                <button type="submit" id="saveTrainingSession">Guardar sessão</button>
+                <button type="button" id="cancelTrainingSession" class="ghost" hidden>Cancelar edição</button>
+                <p id="trainingFormStatus" class="note" role="status" aria-live="polite"></p>
+              </form>
+            </section>
+
+            <section class="card">
+              <div class="training-history-heading">
+                <h2 id="trainingHistoryTitle">Últimas sessões</h2>
+                <button type="button" id="trainingHistoryReset" class="ghost" hidden>Todos</button>
+              </div>
+              <div id="trainingHistory"></div>
+              <button type="button" id="trainingHistoryMore" class="ghost" hidden>Mostrar mais</button>
+            </section>
+          </aside>
+        </div>
+
+        <section class="card training-levels">
+          <h2>Níveis de aprendizagem</h2>
+          <ol>
+  <li>
+    <img class="training-legend-image"
+         src="./treinos-niveis/nivel-1.png"
+         alt="Nível 1">
+    <div>
+      <strong>Descobrir</strong>
+      <small>Primeiras tentativas e interesse.</small>
+    </div>
+  </li>
+
+  <li>
+    <img class="training-legend-image"
+         src="./treinos-niveis/nivel-2.png"
+         alt="Nível 2">
+    <div>
+      <strong>Com ajuda</strong>
+      <small>Executa seguindo um incentivo.</small>
+    </div>
+  </li>
+
+  <li>
+    <img class="training-legend-image"
+         src="./treinos-niveis/nivel-3.png"
+         alt="Nível 3">
+    <div>
+      <strong>Ao sinal</strong>
+      <small>Responde ao gesto ou à palavra.</small>
+    </div>
+  </li>
+
+  <li>
+    <img class="training-legend-image"
+         src="./treinos-niveis/nivel-4.png"
+         alt="Nível 4">
+    <div>
+      <strong>Consistente</strong>
+      <small>Repete com fiabilidade em várias sessões.</small>
+    </div>
+  </li>
+
+  <li>
+    <img class="training-legend-image"
+         src="./treinos-niveis/nivel-5.png"
+         alt="Nível 5">
+    <div>
+      <strong>Dominado</strong>
+      <small>Responde em diferentes contextos.</small>
+    </div>
+  </li>
+</ol>
+
+          <p class="note">O nível descreve o comportamento observado. As sugestões da app são orientativas: confirma a subida ou ajusta o nível ao editar o truque.</p>
+          <details class="reference-method">
+  <summary>Como funciona o progresso?</summary>
+
+  <p class="note">
+    <strong>O que registamos</strong><br>
+    Ao sinal: executou com a palavra ou gesto combinado.
+    Guiada: executou seguindo um snack ou outro incentivo.
+    Sem execução: ainda não conseguiu nessa tentativa.
+    Usar clicker ou recompensar depois não torna uma execução guiada.
+  </p>
+
+  <p class="note">
+    <strong>A barra de progresso</strong><br>
+    Combina prática e resultados recentes:
+    até 10 pontos pela prática, com 2 pontos por dia com sessão;
+    e até 90 pontos pela aprendizagem, calculados pelas últimas
+    5 sessões. Nesta parte, cada execução ao sinal conta por inteiro,
+    cada execução guiada conta 40% e cada tentativa sem execução
+    conta 0%.
+  </p>
+
+  <p class="note">
+    A prática permite reconhecer que o truque já foi trabalhado,
+    mesmo sem grandes resultados. A barra pode subir ou descer
+    conforme o desempenho recente. Clicker e recompensas ficam
+    registados, mas não retiram pontos.
+  </p>
+
+  <p class="note">
+    <strong>Quando sugerimos subir de nível?</strong><br>
+    Nível 1 · Descobrir: existe pelo menos uma sessão.<br>
+    Nível 2 · Com ajuda: pelo menos 5 tentativas, com 60% de
+    execuções conseguidas, ao sinal ou guiadas.<br>
+    Nível 3 · Ao sinal: pelo menos 5 tentativas, com 80%
+    de execuções ao sinal.<br>
+    Para os níveis 2 e 3, usamos até 5 sessões recentes.
+  </p>
+
+  <p class="note">
+    Nível 4 · Consistente: as 3 sessões mais recentes têm,
+    cada uma, pelo menos 3 tentativas e 80% de execuções
+    ao sinal, distribuídas por pelo menos 2 dias.<br>
+    Nível 5 · Dominado: nas últimas 12 sessões, existem pelo menos
+    3 contextos diferentes, cada um com um total mínimo de
+    3 tentativas e 80% de execuções ao sinal.
+    Usa descrições consistentes, como “sala tranquila”
+    ou “corredor com distrações”.
+  </p>
+
+  <p class="note">
+    <strong>Tu confirmas a conquista.</strong><br>
+    As sugestões avaliam a passagem ao nível seguinte.
+    A barra não altera o nível automaticamente:
+    confirma a subida quando corresponder ao que observas,
+    ou ajusta o nível ao editar o truque.
+    Estes critérios são escolhas da app, não uma escala
+    de aprendizagem validada.
+  </p>
+</details>
+        </section>
+
+        <dialog id="trainingTrickDialog" class="training-dialog" aria-labelledby="trainingTrickEditorTitle">
+          <form id="trainingTrickForm">
+            <h2 id="trainingTrickEditorTitle">Novo truque</h2>
+            <label for="trainingTrickName">Nome</label><input id="trainingTrickName" type="text" maxlength="80" required>
+            <div class="training-fields">
+            <select id="trainingTrickIcon">
+            <option value="sit">Sentar</option>
+            <option value="lie">Deitar</option>
+            <option value="recall">Vir ao nome</option>
+            <option value="wait">Esperar</option>
+            <option value="roll">Rebolar</option>
+            <option value="paw">Dar a pata</option>
+            <option value="stand">Ficar de pé</option>
+            <option value="meow">Miar</option>
+            <option value="disc">Apanhar o disco</option>
+            <option value="shoulder">Saltar para o ombro</option>
+            <option value="greet">Cumprimentar pessoas</option>
+            <option value="carrier">Transportadora · símbolo genérico</option>
+            <option value="star">Outro · símbolo genérico</option>
+            </select>              
+            <div><label for="trainingTrickLevel">Nível atual</label><select id="trainingTrickLevel"><option value="0">Por começar</option><option value="1">1 · Descobrir</option><option value="2">2 · Com ajuda</option><option value="3">3 · Ao sinal</option><option value="4">4 · Consistente</option><option value="5">5 · Dominado</option></select></div>
+            </div>
+            <label for="trainingTrickCue">Sinal ou palavra · opcional</label><input id="trainingTrickCue" type="text" maxlength="80" placeholder="Ex.: senta">
+            <label for="trainingTrickNotes">Objetivo / descrição</label><textarea id="trainingTrickNotes" rows="3" maxlength="600" placeholder="O que queremos que ele consiga fazer?"></textarea>
+            <label class="source-toggle"><input id="trainingTrickArchived" type="checkbox">Arquivar este truque, mantendo o histórico</label>
+            <p id="trainingTrickError" class="note" role="status"></p>
+            <div class="training-dialog-actions"><button type="submit">Guardar truque</button><button type="button" id="cancelTrickButton" class="ghost">Cancelar</button></div>
+          </form>
+        </dialog>
+      </div>
+
+      <!-- PÁGINA: SAÚDE -->
+      <div class="view health-grid" data-view="health" id="view-health" hidden>
+
+        <!-- Banner Saúde: partilha o estilo da banner de Treinos -->
+        <header class="training-hero health-hero full" aria-labelledby="healthTitle">
+          <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
+          <h1 id="healthTitle">Sauron, O Imortal</h1>
+          <div class="training-title-divider" aria-hidden="true"><span></span></div>
+          <p>"Even the Dark Lord must guard his strength."</p>
+        </header>
+
+        <section class="card full" id="healthOverview">
+          <h2>Próximos eventos</h2>
+          <div id="healthNextUp"></div>
+        </section>
+
+        <!-- IDENTIFICAÇÃO MÉDICA -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Identificação Médica</p>
+          <p class="royal-divider-subtitle">Dados de identificação e estado clínico</p>
+        </div>
+
+        <section class="card full" id="identityCard">
+          <h2>Identificação do Sauron</h2>
+          <div id="identityDisplay"></div>
+          <button type="button" id="editIdentityBtn">Editar identificação</button>
+          <form id="identityForm" hidden>
+            <div class="grid">
+              <div><label for="idCommonName">Nome comum</label><input id="idCommonName" type="text" maxlength="80"></div>
+              <div><label for="idRegisteredName">Nome registado (SIAC/Pedigree)</label><input id="idRegisteredName" type="text" maxlength="120"></div>
+              <div><label for="idBreed">Raça</label><input id="idBreed" type="text" maxlength="80"></div>
+              <div><label for="idSex">Sexo</label>
+                <select id="idSex">
+                  <option value="Macho">Macho</option>
+                  <option value="Fêmea">Fêmea</option>
+                </select>
+              </div>
+              <div><label for="idBirthDate">Data de nascimento</label><input id="idBirthDate" type="date"></div>
+              <div><label for="idMicrochip">Número de microchip</label><input id="idMicrochip" type="text" maxlength="20" placeholder="Preencher a partir do documento SIAC"></div>
+              <div><label for="idSiac">Estado SIAC</label>
+                <select id="idSiac">
+                  <option value="">Desconhecido</option>
+                  <option value="Registado">Registado</option>
+                  <option value="Não registado">Não registado</option>
+                  <option value="Pendente">Pendente</option>
+                </select>
+              </div>
+              <div><label for="idNeutered">Esterilizado</label>
+                <select id="idNeutered">
+                  <option value="">Desconhecido</option>
+                  <option value="sim">Sim</option>
+                  <option value="nao">Não</option>
+                </select>
+              </div>
+              <div><label for="idNeuteringDate">Data de esterilização</label><input id="idNeuteringDate" type="date"></div>
+              <div><label for="idBloodType">Tipo sanguíneo</label>
+                <select id="idBloodType">
+                  <option value="">Desconhecido</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="AB">AB</option>
+                </select>
+              </div>
+              <div><label for="idAllergies">Alergias conhecidas</label><input id="idAllergies" type="text" maxlength="200" placeholder="Nenhuma conhecida / Desconhecido"></div>
+            </div>
+            <label for="idNotes">Notas clínicas · opcional</label>
+            <textarea id="idNotes" rows="2" maxlength="500"></textarea>
+            <button type="submit">Guardar identificação</button>
+            <button type="button" id="cancelIdentity">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- VACINAÇÃO -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Vacinação</p>
+          <p class="royal-divider-subtitle">Protocolo vacinal e reforços</p>
+        </div>
+
+        <section class="card full">
+          <h2>Registo de vacinas</h2>
+          <p class="hint">Regista cada vacina com a data de administração e a data do próximo reforço. Deixa as datas vazias se ainda não tens a informação.</p>
+          <button type="button" id="addVaccine">+ Nova vacina</button>
+          <div class="scroll">
+            <table class="health-table">
+              <thead>
+                <tr>
+                  <th scope="col">Vacina</th>
+                  <th scope="col">Administrada</th>
+                  <th scope="col">Consulta agendada</th>
+                  <th scope="col">Próximo reforço</th>
+                  <th scope="col">Produto / Lote</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="vaccineRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- DESPARASITAÇÃO -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Desparasitação</p>
+          <p class="royal-divider-subtitle">Tratamentos internos e externos</p>
+        </div>
+
+        <section class="card full">
+          <h2>Registo de desparasitação</h2>
+          <p class="hint">Interna (oral/injetável) contra parasitas intestinais; externa (antipulgas, carraças).</p>
+          <button type="button" id="addDeworming">+ Nova desparasitação</button>
+          <div class="scroll">
+            <table class="health-table">
+              <thead>
+                <tr>
+                  <th scope="col">Tratamento</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Próximo</th>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="dewormingRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- HEALTH EDITOR (shared for vaccines/deworming) -->
+        <section class="card full" id="healthEditor" hidden>
+          <h2 id="healthEditorTitle">Novo registo</h2>
+          <form id="healthForm">
+            <div class="grid">
+              <div>
+                <label for="hType">Tipo</label>
+                <select id="hType">
+                  <option value="vaccine">Vacina</option>
+                  <option value="deworming">Desparasitação</option>
+                </select>
+              </div>
+              <div id="hSubtypeField" hidden>
+                <label for="hSubtype">Tipo de desparasitação</label>
+                <select id="hSubtype">
+                  <option value="internal">Interna · oral ou injetável</option>
+                  <option value="external">Externa · antipulgas / carraças</option>
+                  <option value="unknown">Não confirmado</option>
+                </select>
+              </div>
+              <div>
+                <label for="hName">Nome / descrição</label>
+                <input id="hName" type="text" maxlength="120" required placeholder="Ex.: Trivalente 1.ª dose, Leucemia Felina, Drontal">
+              </div>
+              <div>
+                <label for="hProduct">Produto · opcional</label>
+                <input id="hProduct" type="text" maxlength="120" placeholder="Ex.: Purevax RCPCh, Frontline Plus">
+              </div>
+              <div>
+                <label for="hDate">Data de administração · opcional</label>
+                <input id="hDate" type="date">
+              </div>
+              <div>
+                <label for="hNextDue">Próxima dose / tratamento · opcional</label>
+                <input id="hNextDue" type="date">
+              </div>
+              <div>
+                <label for="hAppointmentDate">Data de consulta agendada · opcional</label>
+                <input id="hAppointmentDate" type="date">
+              </div>
+              <div>
+                <label for="hBatch">Lote · opcional</label>
+                <input id="hBatch" type="text" maxlength="60" placeholder="Ex.: 872639">
+              </div>
+              <div>
+                <label for="hAdminVet">Médico que administrou · opcional</label>
+                <input id="hAdminVet" type="text" maxlength="120">
+              </div>
+              <div>
+                <label for="hStatus">Estado</label>
+                <select id="hStatus">
+                  <option value="administered">Administrado</option>
+                  <option value="planned">Agendado</option>
+                  <option value="postponed">Adiado</option>
+                  <option value="cancelled">Cancelado</option>
+                </select>
+              </div>
+            </div>
+            <label for="hNotes">Notas · opcional</label>
+            <textarea id="hNotes" rows="2" maxlength="400" placeholder="Ex.: sem reações adversas, administrado pelo Dr. Silva"></textarea>
+            <label class="source-toggle">
+              <input id="hDone" type="checkbox"> Já administrado
+            </label>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelHealth" class="ghost">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- CONSULTAS -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Consultas</p>
+          <p class="royal-divider-subtitle">Histórico de visitas ao veterinário</p>
+        </div>
+
+        <section class="card full">
+          <h2>Consultas veterinárias</h2>
+          <button type="button" id="addVisit">+ Nova consulta</button>
+          <div class="scroll">
+            <table class="health-table">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Motivo</th>
+                  <th scope="col">Médico</th>
+                  <th scope="col">Peso</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="visitRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card full" id="visitEditor" hidden>
+          <h2 id="visitEditorTitle">Nova consulta</h2>
+          <form id="visitForm">
+            <div class="grid">
+              <div>
+                <label for="visDate">Data</label>
+                <input id="visDate" type="date" required>
+              </div>
+              <div>
+                <label for="visStatus">Estado</label>
+                <select id="visStatus">
+                  <option value="planned">Agendada</option>
+                  <option value="completed">Realizada</option>
+                  <option value="cancelled">Cancelada</option>
+                </select>
+              </div>
+              <div>
+                <label for="visType">Tipo de consulta</label>
+                <select id="visType">
+                  <option value="consultation">Consulta geral</option>
+                  <option value="vaccination">Vacinação</option>
+                  <option value="surgery">Cirurgia</option>
+                  <option value="examination">Exame diagnóstico</option>
+                  <option value="followup">Acompanhamento</option>
+                  <option value="other">Outro</option>
+                </select>
+              </div>
+              <div>
+                <label for="visVet">Médico · opcional</label>
+                <input id="visVet" type="text" maxlength="120" placeholder="Ex.: Dr.ª Ana Costa">
+              </div>
+              <div>
+                <label for="visClinic">Clínica · opcional</label>
+                <input id="visClinic" type="text" maxlength="120">
+              </div>
+              <div>
+                <label for="visReason">Motivo</label>
+                <input id="visReason" type="text" maxlength="200" required placeholder="Ex.: 1.ª consulta, vacinação, revisão anual">
+              </div>
+              <div>
+                <label for="visWeight">Peso na consulta · opcional (kg)</label>
+                <input id="visWeight" type="number" min="0.1" max="20" step="0.01" placeholder="Ex.: 4.25">
+              </div>
+              <div>
+                <label for="visNext">Próxima consulta · opcional</label>
+                <input id="visNext" type="date">
+              </div>
+              <div>
+                <label for="visSymptoms">Sintomas / motivo clínico · opcional</label>
+                <input id="visSymptoms" type="text" maxlength="300">
+              </div>
+            </div>
+            <label for="visFindings">Achados / diagnóstico · opcional</label>
+            <textarea id="visFindings" rows="2" maxlength="400"></textarea>
+            <label for="visTreatment">Tratamento / recomendações · opcional</label>
+            <textarea id="visTreatment" rows="2" maxlength="400"></textarea>
+            <label for="visNotes">Notas · opcional</label>
+            <textarea id="visNotes" rows="2" maxlength="500" placeholder="Ex.: tudo bem, próxima vacinação em março"></textarea>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelVisit">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- PERFIL GENÉTICO -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Perfil Genético</p>
+          <p class="royal-divider-subtitle">Resultados de testes ADN e saúde hereditária</p>
+        </div>
+
+        <section class="card full" id="geneticCard">
+          <h2>Perfil Genético</h2>
+          <p class="hint">Os resultados dos progenitores foram testados diretamente. Os resultados individuais do Sauron ficam como "Não testado" até à realização de um painel genético próprio.</p>
+          <div id="geneticParentsMeta"></div>
+          <div id="geneticTableWrap"></div>
+          <p class="note" style="margin-top:12px">⚠ Um resultado genético negativo para a variante HCM1 não exclui todas as formas de cardiomiopatia hipertrófica. O acompanhamento cardíaco deve seguir a recomendação veterinária.</p>
+          <div class="pedigree-entry" style="margin-top:4px">
+            <button type="button" id="openPedigreeBtn" class="pedigree-entry-btn">🌳 Árvore Genealógica</button>
+          </div>
+        </section>
+
+        <!-- DIÁRIO DE SAÚDE -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Diário de Saúde</p>
+          <p class="royal-divider-subtitle">Observações e sintomas</p>
+        </div>
+
+        <section class="card full" id="diaryCard">
+          <h2>Observações de saúde</h2>
+          <p class="hint">Regista sintomas e observações para partilhar com o veterinário. Esta secção não substitui aconselhamento veterinário.</p>
+          <button type="button" id="addDiary">+ Nova observação</button>
+          <div id="diaryList"></div>
+        </section>
+
+        <section class="card full" id="diaryEditor" hidden>
+          <h2 id="diaryEditorTitle">Nova observação</h2>
+          <form id="diaryForm">
+            <div class="grid">
+              <div><label for="dDate">Data</label><input id="dDate" type="date" required></div>
+              <div><label for="dSymptom">Sintoma / observação</label><input id="dSymptom" type="text" maxlength="150" required placeholder="Ex.: espirros, vómito, alteração de apetite"></div>
+              <div><label for="dSeverity">Intensidade</label>
+                <select id="dSeverity">
+                  <option value="mild">Ligeira</option>
+                  <option value="moderate">Moderada</option>
+                  <option value="severe">Intensa</option>
+                </select>
+              </div>
+              <div><label for="dStatus">Estado</label>
+                <select id="dStatus">
+                  <option value="ongoing">Em curso</option>
+                  <option value="resolved">Resolvido</option>
+                </select>
+              </div>
+            </div>
+            <label for="dNotes">Notas · opcional</label>
+            <textarea id="dNotes" rows="2" maxlength="400"></textarea>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelDiary">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- RASTREIOS E PREVENÇÃO -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Rastreios e Prevenção</p>
+          <p class="royal-divider-subtitle">Exames preventivos a discutir com o veterinário</p>
+        </div>
+
+        <section class="card full" id="screeningsCard">
+          <h2>Rastreios preventivos</h2>
+          <p class="hint">Exames sugeridos para Maine Coon — a agendar e confirmar com o veterinário. Não constituem obrigações médicas automáticas.</p>
+          <button type="button" id="addScreening">+ Novo rastreio</button>
+          <div id="screeningList"></div>
+        </section>
+
+        <section class="card full" id="screeningEditor" hidden>
+          <h2 id="screeningEditorTitle">Novo rastreio</h2>
+          <form id="screeningForm">
+            <div class="grid">
+              <div><label for="scrName">Exame / rastreio</label><input id="scrName" type="text" maxlength="150" required placeholder="Ex.: Ecocardiograma, Displasia da anca"></div>
+              <div><label for="scrVetRecommended">Recomendado pelo veterinário</label>
+                <select id="scrVetRecommended">
+                  <option value="">Desconhecido</option>
+                  <option value="sim">Sim</option>
+                  <option value="nao">Não</option>
+                </select>
+              </div>
+              <div><label for="scrPlannedDate">Data planeada · opcional</label><input id="scrPlannedDate" type="date"></div>
+              <div><label for="scrCompletedDate">Data realizado · opcional</label><input id="scrCompletedDate" type="date"></div>
+              <div><label for="scrNextDate">Próxima revisão · opcional</label><input id="scrNextDate" type="date"></div>
+            </div>
+            <label for="scrNotes">Resultado / notas · opcional</label>
+            <textarea id="scrNotes" rows="2" maxlength="400"></textarea>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelScreening">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- MEDICAÇÃO E TRATAMENTOS -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Medicação e Tratamentos</p>
+          <p class="royal-divider-subtitle">Histórico de medicação prescrita</p>
+        </div>
+
+        <section class="card full" id="medicationsCard">
+          <h2>Medicação e tratamentos</h2>
+          <p class="hint">Regista apenas medicação prescrita pelo veterinário. Não calcular doses automaticamente.</p>
+          <button type="button" id="addMedication">+ Nova medicação</button>
+          <div id="medicationList"></div>
+        </section>
+
+        <section class="card full" id="medicationEditor" hidden>
+          <h2 id="medicationEditorTitle">Nova medicação</h2>
+          <form id="medicationForm">
+            <div class="grid">
+              <div><label for="medName">Medicamento / tratamento</label><input id="medName" type="text" maxlength="120" required></div>
+              <div><label for="medPurpose">Finalidade</label><input id="medPurpose" type="text" maxlength="200"></div>
+              <div><label for="medDose">Dose (conforme prescrição)</label><input id="medDose" type="text" maxlength="80"></div>
+              <div><label for="medFrequency">Frequência</label><input id="medFrequency" type="text" maxlength="80" placeholder="Ex.: 1x/dia, 12 em 12h"></div>
+              <div><label for="medStart">Data início</label><input id="medStart" type="date"></div>
+              <div><label for="medEnd">Data fim · opcional</label><input id="medEnd" type="date"></div>
+              <div><label for="medVet">Veterinário prescritor · opcional</label><input id="medVet" type="text" maxlength="120"></div>
+              <div><label for="medStatus">Estado</label>
+                <select id="medStatus">
+                  <option value="active">Ativo</option>
+                  <option value="completed">Concluído</option>
+                  <option value="planned">Planeado</option>
+                </select>
+              </div>
+            </div>
+            <label for="medNotes">Notas · opcional</label>
+            <textarea id="medNotes" rows="2" maxlength="400"></textarea>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelMedication">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- VETERINÁRIO -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Veterinário</p>
+          <p class="royal-divider-subtitle">Clínica e médico responsável</p>
+        </div>
+
+        <section class="card full" id="vetCard">
+          <h2>Contactos veterinários</h2>
+          <button type="button" id="addVet">+ Novo contacto</button>
+          <div id="vetList"></div>
+        </section>
+
+        <section class="card full" id="vetEditor" hidden>
+          <h2 id="vetEditorTitle">Novo contacto veterinário</h2>
+          <form id="vetForm">
+            <div class="grid">
+              <div>
+                <label for="vRole">Papel</label>
+                <select id="vRole">
+                  <option value="primary">Principal</option>
+                  <option value="historical">Histórico</option>
+                  <option value="emergency">Urgência</option>
+                </select>
+              </div>
+              <div>
+                <label for="vClinic">Clínica</label>
+                <input id="vClinic" type="text" maxlength="120" placeholder="Ex.: Clínica VetPoint">
+              </div>
+              <div>
+                <label for="vVet">Médico veterinário</label>
+                <input id="vVet" type="text" maxlength="120" placeholder="Ex.: Dr.ª Ana Costa">
+              </div>
+              <div>
+                <label for="vPhone">Telefone</label>
+                <input id="vPhone" type="tel" maxlength="60" placeholder="Ex.: 220 123 456">
+              </div>
+              <div>
+                <label for="vEmergency">Urgência / contacto de emergência</label>
+                <input id="vEmergency" type="tel" maxlength="60" placeholder="Ex.: 964 000 111">
+              </div>
+            </div>
+            <label for="vAddress">Morada</label>
+            <input id="vAddress" type="text" maxlength="200" placeholder="Ex.: Rua do Veterinário, 10, Lisboa">
+            <label for="vNotes">Notas · opcional</label>
+            <textarea id="vNotes" rows="2" maxlength="400" placeholder="Ex.: consultas às 2.ª e 6.ª, estacionamento gratuito"></textarea>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelVet">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- DOCUMENTOS -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Documentos</p>
+          <p class="royal-divider-subtitle">Links para testes, relatórios e registos</p>
+        </div>
+
+        <section class="card full">
+          <h2>Documentos e registos</h2>
+          <p class="hint">Guarda links para documentos no OneDrive, Google Drive ou outro serviço. Os ficheiros ficam na tua nuvem — a app guarda apenas o link.</p>
+          <button type="button" id="addDocument">+ Novo documento</button>
+          <div id="documentList"></div>
+        </section>
+
+        <section class="card full" id="documentEditor" hidden>
+          <h2 id="documentEditorTitle">Novo documento</h2>
+          <form id="documentForm">
+            <div class="grid">
+              <div>
+                <label for="docName">Nome</label>
+                <input id="docName" type="text" maxlength="150" required placeholder="Ex.: Teste genético Sauron, Relatório outubro 2026">
+              </div>
+              <div>
+                <label for="docType">Tipo</label>
+                <select id="docType">
+                  <option value="genetic">Teste genético</option>
+                  <option value="vet">Relatório veterinário</option>
+                  <option value="vaccine">Boletim de vacinas</option>
+                  <option value="insurance">Seguro</option>
+                  <option value="pedigree">Pedigree / registo</option>
+                  <option value="other">Outro</option>
+                </select>
+              </div>
+              <div>
+                <label for="docDate">Data · opcional</label>
+                <input id="docDate" type="date">
+              </div>
+              <div>
+                <label for="docUrl">Link</label>
+                <input id="docUrl" type="url" maxlength="500" required placeholder="https://...">
+              </div>
+            </div>
+            <label for="docNotes">Notas · opcional</label>
+            <textarea id="docNotes" rows="2" maxlength="300"></textarea>
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelDocument">Cancelar</button>
+          </form>
+        </section>
+
+        <!-- EXPORTAR / IMPORTAR -->
+        <div class="royal-divider full">
+          <span class="royal-divider-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 110" focusable="false"><use href="#royal-eye"></use></svg>
+          </span>
+          <p class="royal-divider-title">Dados de Saúde</p>
+          <p class="royal-divider-subtitle">Exportar e importar registos</p>
+        </div>
+
+        <section class="card full" id="dataPortabilityCard">
+          <h2>Exportar / Importar</h2>
+          <p class="hint">Exporta todos os dados de saúde para um ficheiro JSON. A importação substitui os dados atuais após confirmação.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+            <button type="button" id="exportHealthBtn">Exportar dados de saúde</button>
+            <button type="button" id="importHealthBtn">Importar dados de saúde</button>
+            <input id="importHealthInput" type="file" accept=".json" hidden>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="app-footer">
+        Confirma os rótulos e ajusta o plano com o veterinário.
+        Os registos descrevem planos e pesagens,
+        não o consumo alimentar efetivamente observado.
+      </footer>
+    </main>
+  </div>
+
+  <script src="./Sauron.js" defer></script>
+
+  <!-- ÁRVORE GENEALÓGICA — fora de qualquer grid/view para o showModal() funcionar correctamente -->
+  <dialog id="pedigreeDialog" class="pedigree-dialog" aria-labelledby="pedigreeDialogTitle">
+    <div class="pedigree-dialog-header">
+      <div>
+        <h2 id="pedigreeDialogTitle" class="pedigree-title">A Linhagem de Sauron</h2>
+        <p class="pedigree-subtitle">Pedigree oficial · Clube Português de Felinicultura · FIFe</p>
+      </div>
+      <button type="button" id="closePedigreeBtn" class="pedigree-close" aria-label="Fechar árvore genealógica">✕</button>
+    </div>
+    <div class="pedigree-dialog-body">
+      <div class="pedigree-legend" id="pedigreeLegend"></div>
+      <div class="pedigree-tree-scroll">
+        <div class="pedigree-tree-container" id="pedigreeTreeContainer"></div>
+      </div>
+      <div class="pedigree-detail-panel" id="pedigreeDetailPanel" hidden>
+        <div id="pedigreeDetailContent"></div>
+        <button type="button" class="ghost" id="closePedigreeDetail" style="margin-top:14px">Fechar painel</button>
+      </div>
+      <details class="pedigree-expandable">
+        <summary>ⓘ Compreender as cores do pedigree</summary>
+        <div id="pedigreeEmsContent"></div>
+      </details>
+      <details class="pedigree-expandable">
+        <summary>Curiosidades da Linhagem</summary>
+        <div id="pedigreeStatsContent"></div>
+      </details>
+    </div>
+  </dialog>
+</body>
+</html>
