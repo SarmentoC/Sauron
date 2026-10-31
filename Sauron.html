@@ -113,6 +113,9 @@
           </svg>
           Saúde
         </button>
+        <button type="button" data-tab="memories" aria-pressed="false">
+          <span aria-hidden="true">▧</span> Memórias
+        </button>
       </nav>
 
       <div class="royal-sidebar-scene">
@@ -1821,6 +1824,50 @@
 
       </div>
 
+      <div class="view memories-view" data-view="memories" id="view-memories" hidden>
+        <section class="memories-hero">
+          <p class="memories-eyebrow">O livro de Sauron</p>
+          <h2>Pequenos dias. Grandes memórias.</h2>
+          <p>Uma semana de cada vez: o crescimento, os acontecimentos e os momentos que ficam.</p>
+        </section>
+        <p class="hint memories-storage-note">As fotos e vídeos ficam guardados neste navegador e dispositivo. Ainda não são sincronizados nem têm cópia de segurança. Mantém os originais.</p>
+        <div class="memories-layout">
+          <aside class="card memories-sidebar" aria-label="Escolher semana">
+            <h2>As nossas semanas</h2>
+            <label for="memoryDate">Ir para uma data</label>
+            <input type="date" id="memoryDate">
+            <button type="button" class="ghost" id="memoryCurrent">Semana atual</button>
+            <div id="memoryWeeks" class="memory-weeks"></div>
+          </aside>
+          <div class="memory-report-column">
+            <section class="card memory-report" aria-labelledby="memoryReportTitle">
+              <p class="memories-eyebrow" id="memoryWeekState"></p>
+              <h2 id="memoryReportTitle">Relatório semanal</h2>
+              <p class="hint" id="memoryReportDates"></p>
+              <p id="memorySummary"></p>
+              <div class="memory-metrics" id="memoryMetrics"></div>
+              <p class="hint">Resumo automático dos registos da app, organizado de segunda a domingo. Atualiza-se ao abrir este separador; as correções dos registos também se refletem nas semanas anteriores.</p>
+              <h3>Acontecimentos da semana</h3>
+              <ol class="memory-timeline" id="memoryEvents"></ol>
+              <h3>Notas desta semana</h3>
+              <label class="hint" for="memoryNotes">Os pormenores que só tu conheces</label>
+              <textarea id="memoryNotes" rows="4" maxlength="4000" placeholder="Uma nova brincadeira, um sítio favorito, uma pequena conquista…"></textarea>
+              <p class="hint" id="memoryNoteStatus" role="status"></p>
+            </section>
+            <section class="card" aria-labelledby="memoryGalleryTitle">
+              <div class="memory-gallery-heading">
+                <div><p class="memories-eyebrow">Momentos para guardar</p><h2 id="memoryGalleryTitle">Fotografias e vídeos</h2></div>
+                <button type="button" id="memoryAddMedia">+ Adicionar</button>
+              </div>
+              <input type="file" id="memoryMediaInput" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,video/mp4,video/webm,video/quicktime" multiple hidden>
+              <p class="hint">Os ficheiros escolhidos ficam associados à semana selecionada. JPEG, PNG, WebP, GIF, AVIF, MP4, WebM ou MOV; até 100 MB por ficheiro. A reprodução de vídeo depende do formato suportado pelo navegador.</p>
+              <p id="memoryMediaStatus" role="status" class="hint"></p>
+              <div id="memoryGallery" class="memory-gallery" aria-busy="false"></div>
+            </section>
+          </div>
+        </div>
+      </div>
+
       <footer class="app-footer">
         Confirma os rótulos e ajusta o plano com o veterinário.
         Os registos descrevem planos e pesagens,
@@ -1830,6 +1877,7 @@
   </div>
 
   <script src="./Sauron.js" defer></script>
+  <script src="./SauronMemorias.js" defer></script>
 
   <!-- ÁRVORE GENEALÓGICA — fora de qualquer grid/view para o showModal() funcionar correctamente -->
   <dialog id="pedigreeDialog" class="pedigree-dialog" aria-labelledby="pedigreeDialogTitle">

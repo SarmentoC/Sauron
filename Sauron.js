@@ -18,7 +18,7 @@
         calcium: null,
         phosphorus: null,
         status: "estimated",
-        url: "https://goldpet.pt/racao-seca/22462-41141-pro-plan-healthy-start-racao-seca-para-gatinho-frango.html#/quantidade-10_kg"
+        url: null
       },
       {
         id: "wet-carny",
@@ -60,7 +60,7 @@
         calcium: null,
         phosphorus: null,
         status: "estimated",
-        url: "https://goldpet.pt/alimentos-humidos/22411-30932-pro-plan-healthy-start-kitten-alimento-em-molho-para-gatinho-peru.html#/quantidade-26_x_85_g"
+        url: null
       }
     ];
 
@@ -70,6 +70,7 @@
     let savedSettings = {};
     let editingId = null;
     let chartRange = "all";
+    let memories = { version: 1, notes: {} };
     let health = { records: [], visits: [], vets: [], identity: null, genetic: { fatherName: "Thor Monterrey*PT", fatherLab: "LABOKLIN", fatherDate: "2024-05-24", motherName: "Alexa Monterrey*PT", motherLab: "LABOKLIN", motherDate: "2024-06-20", results: [] }, documents: [], diary: [], screenings: [], medications: [] };
     let healthEditingId = null;
     let visitEditingId = null;
@@ -263,6 +264,9 @@
       loadTraining(stored.training);
 
       health = migrateHealth(stored.health);
+      memories = { version: 1, notes: Object.fromEntries(
+        Object.entries(stored.memories?.notes || {}).filter(([key, value]) => validDate(key) && typeof value === "string")
+      ) };
 
       foods = Array.isArray(stored.foods)
         ? stored.foods.filter(validFood)
@@ -347,6 +351,7 @@
             snackDays,
             training,
             health,
+            memories,
             settings: getSettings()
             })
         );
@@ -1816,8 +1821,8 @@ food.taurine = totalTaurine.known
     }
 
     function showTab(tab) {
-      if (!["plan", "foods", "growth", "training", "health"].includes(tab)) return;
-      $("mainHero").hidden = ["training", "foods", "growth", "health"].includes(tab);
+      if (!["plan", "foods", "growth", "training", "health", "memories"].includes(tab)) return;
+      $("mainHero").hidden = ["training", "foods", "growth", "health", "memories"].includes(tab);
       if (tab === "training") renderTraining();
 
       closeFoodEditor();
@@ -1842,6 +1847,7 @@ food.taurine = totalTaurine.known
       }
 
       if (tab === "health") renderHealth();
+      if (tab === "memories" && typeof SauronMemories !== "undefined") SauronMemories.render();
     }
 
     const HYDRATION_KEY = "sauron-hydration-v1";

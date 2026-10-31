@@ -1,0 +1,49 @@
+SAURON — MEMÓRIAS SEMANAIS
+
+INSTALAR
+Copia estes quatro ficheiros para a pasta onde já tens a app:
+- Sauron.html
+- Sauron.css
+- Sauron.js
+- SauronMemorias.js (novo; necessário)
+Mantém todas as imagens e outros recursos que já existem nessa pasta.
+Publica os quatro ficheiros no GitHub Pages. Se necessário, atualiza a página com Ctrl+F5.
+
+UTILIZAR
+Abre o separador Memórias. A semana atual é selecionada automaticamente.
+Os resumos são calculados a partir dos registos já existentes nesse navegador,
+com semanas de segunda a domingo. Consulta semanas anteriores na lista ou escolhe uma data.
+As semanas anteriores também refletem correções posteriores dos registos.
+O peso indicado é o último medido até ao período observado, com a data da medição.
+Não é usado o peso atual para preencher retroativamente semanas sem pesagens.
+A variação compara a última pesagem da semana com a última anterior à semana,
+e pode abranger mais de sete dias.
+
+Adiciona fotos e vídeos à semana selecionada e escreve as tuas notas.
+As notas são guardadas automaticamente. Os ficheiros conservam os bytes originais
+e podem ser descarregados individualmente. MOV e outros vídeos podem não ser
+reproduzíveis em todos os navegadores; nesse caso descarrega o original.
+
+ARMAZENAMENTO NESTA VERSÃO
+Os registos existentes não são apagados nem substituídos pela instalação.
+A versão local e a versão GitHub Pages têm armazenamento separado.
+Esta funcionalidade não transfere os dados da versão local para a versão online.
+As fotos e os vídeos são guardados apenas no navegador e dispositivo utilizados.
+Mantém os originais: ainda não existe sincronização nem backup completo da app.
+O botão Exportar dados de saúde continua a exportar apenas a saúde.
+
+ALTERAÇÕES
+HTML: novo separador e carregamento de SauronMemorias.js.
+CSS: apresentação responsiva das memórias e da galeria.
+JS principal: ligação do separador e persistência das notas juntamente com os dados.
+JS novo: relatórios automáticos e armazenamento dos ficheiros multimédia.
+Mantidas as correções anteriores da árvore genealógica e da coluna da mãe.
+
+CONTRATO PARA SINCRONIZAÇÃO E BACKUP FUTUROS
+Relatórios: projeção dos registos datados, sem uma segunda cópia do histórico.
+Notas: campo memories {version: 1, notes: {segunda-feira-ISO: texto}} no estado principal
+(sauron-nutrition-v3). Hidratação permanece no armazenamento separado já existente.
+Multimédia: IndexedDB sauron-memories-v1, versão 1, object store media, keyPath id,
+índice week. Cada item contém version, id, week, name, type, size, blob e createdAt.
+O backup completo terá de incluir o estado principal, a hidratação e todos os blobs,
+com validação e restauro da associação à semana. Referências sem blobs não bastam.
