@@ -4697,35 +4697,6 @@ function deleteTrainingSession(id, confirmed = false) {
       status("Documento guardado.");
     }
 
-    // --- EXPORTAR / IMPORTAR ---
-
-    function exportHealth() {
-      const data = JSON.stringify({ version: 2, exported: today(), health }, null, 2);
-      const blob = new Blob([data], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "sauron-saude-" + today() + ".json";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function importHealth(file) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        try {
-          const parsed = JSON.parse(e.target.result);
-          if (!parsed.health) { status("Ficheiro inválido: campo 'health' em falta."); return; }
-          if (!confirm("Substituir todos os dados de saúde com o ficheiro importado? Esta ação não pode ser desfeita.")) return;
-          health = migrateHealth(parsed.health);
-          persist();
-          renderHealth();
-          status("Dados de saúde importados com sucesso.");
-        } catch { status("Erro ao ler o ficheiro JSON."); }
-      };
-      reader.readAsText(file);
-    }
-
     // ══════════════════════════════════════════════════════
     // PEDIGREE — READ-ONLY official CPF/FIFe data
     // ══════════════════════════════════════════════════════
@@ -5175,12 +5146,6 @@ function deleteTrainingSession(id, confirmed = false) {
       $("documentForm").addEventListener("submit", saveDocument);
       $("cancelDocument").addEventListener("click", closeDocumentEditor);
 
-      $("exportHealthBtn").addEventListener("click", exportHealth);
-      $("importHealthBtn").addEventListener("click", () => $("importHealthInput").click());
-      $("importHealthInput").addEventListener("change", e => {
-        if (e.target.files[0]) importHealth(e.target.files[0]);
-        e.target.value = "";
-      });
     }
 
 
