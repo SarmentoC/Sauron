@@ -1821,8 +1821,8 @@ food.taurine = totalTaurine.known
     }
 
     function showTab(tab) {
-      if (!["plan", "foods", "growth", "training", "health", "memories"].includes(tab)) return;
-      $("mainHero").hidden = ["training", "foods", "growth", "health", "memories"].includes(tab);
+      if (!["plan", "foods", "growth", "training", "health", "memories", "backup"].includes(tab)) return;
+      $("mainHero").hidden = ["training", "foods", "growth", "health", "memories", "backup"].includes(tab);
       if (tab === "training") renderTraining();
 
       closeFoodEditor();
@@ -1847,6 +1847,7 @@ food.taurine = totalTaurine.known
       }
 
       if (tab === "health") renderHealth();
+      if (tab === "backup" && typeof SauronBackup !== "undefined") SauronBackup.render();
       if (tab === "memories" && typeof SauronMemories !== "undefined") SauronMemories.render();
     }
 

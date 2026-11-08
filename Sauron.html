@@ -118,6 +118,9 @@
         <button type="button" data-tab="memories" aria-pressed="false">
           <span aria-hidden="true">▧</span> Memórias
         </button>
+        <button type="button" data-tab="backup" aria-pressed="false">
+          <span aria-hidden="true">⇩</span> Backup
+        </button>
       </nav>
 
       <div class="royal-sidebar-scene">
@@ -1832,7 +1835,7 @@
           <h2>Pequenos dias. Grandes memórias.</h2>
           <p>Uma semana de cada vez: o crescimento, os acontecimentos e os momentos que ficam.</p>
         </section>
-        <p class="hint memories-storage-note">As fotos e vídeos ficam guardados neste navegador e dispositivo. Ainda não são sincronizados nem têm cópia de segurança. Mantém os originais.</p>
+        <p class="hint memories-storage-note">As fotos e vídeos ficam guardados neste navegador e dispositivo. Usa o separador Backup para exportar uma cópia completa. A sincronização automática ainda não está disponível.</p>
         <div class="memories-layout">
           <aside class="card memories-sidebar" aria-label="Escolher semana">
             <h2>As nossas semanas</h2>
@@ -1870,6 +1873,39 @@
         </div>
       </div>
 
+      <div class="view backup-view" data-view="backup" id="view-backup" hidden>
+        <section class="card backup-intro">
+          <p class="backup-eyebrow">A história de Sauron, contigo</p>
+          <h2>Guardar e transferir os dados</h2>
+          <p>Um único ZIP com os registos da app, as notas e os originais das fotografias e vídeos adicionados às Memórias.</p>
+          <p class="hint">Para passar da app local para a online: descarrega o backup na versão que tem os dados certos e importa esse mesmo ZIP na outra versão.</p>
+          <p class="hint">O ZIP não inclui as imagens do design nem ficheiros que estejam apenas numa pasta do computador. Ainda não existe sincronização automática.</p>
+          <div id="backupCounts" class="backup-counts" aria-live="polite"></div>
+        </section>
+        <div class="backup-actions-grid">
+          <section class="card">
+            <h2>1. Descarregar</h2>
+            <p class="hint">Inclui peso, saúde, alimentação, snacks, treinos, água, definições, notas e multimédia das Memórias.</p>
+            <button type="button" id="exportFullBackup">Descarregar backup completo</button>
+            <p class="hint">Até 512 MB de conteúdo por backup. Guarda o ZIP fora da pasta do projeto; não precisas de o enviar para o GitHub.</p>
+          </section>
+          <section class="card">
+            <h2>2. Importar</h2>
+            <p class="hint">Escolhe um backup completo criado neste separador. Podes rever o conteúdo antes de confirmar.</p>
+            <button type="button" id="importFullBackup">Escolher backup ZIP</button>
+            <input id="fullBackupFile" type="file" accept=".zip,application/zip" hidden>
+            <p class="hint">A importação substitui os dados deste navegador pelos dados do ZIP. Fecha os outros separadores desta app antes de continuar.</p>
+          </section>
+        </div>
+        <section class="card">
+          <h2>Recuperar a versão anterior</h2>
+          <p class="hint">Antes de cada importação é guardada uma cópia dos dados que serão substituídos, incluindo a multimédia. Esta cópia fica neste navegador e pode ser recuperada aqui.</p>
+          <button type="button" class="ghost" id="restorePreviousBackup" disabled>Recuperar antes da última importação</button>
+          <p class="hint" id="backupRecoveryInfo"></p>
+        </section>
+        <p id="fullBackupStatus" class="hint" role="status" aria-live="polite"></p>
+      </div>
+
       <footer class="app-footer">
         Confirma os rótulos e ajusta o plano com o veterinário.
         Os registos descrevem planos e pesagens,
@@ -1880,6 +1916,18 @@
 
   <script src="./Sauron.js" defer></script>
   <script src="./SauronMemorias.js" defer></script>
+  <script src="./vendor/fflate.js" defer></script>
+  <script src="./SauronBackup.js" defer></script>
+
+  <dialog id="fullBackupDialog" class="backup-dialog" aria-labelledby="fullBackupDialogTitle">
+    <h2 id="fullBackupDialogTitle">Backup completo</h2>
+    <p id="fullBackupDialogMessage" role="status" aria-live="polite"></p>
+    <div id="fullBackupPreview"></div>
+    <div class="backup-dialog-actions">
+      <button type="button" id="confirmFullBackup" hidden>Substituir os dados deste navegador</button>
+      <button type="button" class="ghost" id="closeFullBackupDialog">Cancelar</button>
+    </div>
+  </dialog>
 
   <!-- ÁRVORE GENEALÓGICA — fora de qualquer grid/view para o showModal() funcionar correctamente -->
   <dialog id="pedigreeDialog" class="pedigree-dialog" aria-labelledby="pedigreeDialogTitle">

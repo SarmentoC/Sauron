@@ -5037,3 +5037,21 @@ details.gen-summary[open] .gen-summary-toggle { color: var(--tx); border-color: 
   .memory-metrics { grid-template-columns: minmax(0, 1fr); }
   .memory-gallery { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* BACKUP COMPLETO */
+.backup-view { display: flex; flex-direction: column; gap: 20px; }
+.backup-intro { background: radial-gradient(ellipse at top right, #8e592c28, transparent 70%), #10120d; }
+.backup-intro h2 { color: var(--gold); font-family: 'Cinzel', Georgia, serif; font-size: clamp(22px, 3vw, 32px); }
+.backup-eyebrow { color: var(--gold); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
+.backup-counts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.backup-counts span { border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; color: var(--gold); font-size: 13px; }
+.backup-actions-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.backup-actions-grid button { margin-top: 12px; white-space: normal; }
+.backup-dialog { width: min(620px, calc(100vw - 32px)); padding: 28px; color: var(--tx); background: #11140e; border: 1px solid var(--gold2); border-radius: 12px; max-height: 90dvh; overflow-y: auto; }
+.backup-dialog::backdrop { background: #000c; backdrop-filter: blur(4px); }
+.backup-dialog h2 { color: var(--gold); }
+.backup-dialog-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.backup-dialog-actions button { white-space: normal; }
+.backup-preview { list-style: none; padding: 0; }
+.backup-preview li { padding: 10px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+@media(max-width:700px) { .backup-actions-grid { grid-template-columns: minmax(0, 1fr); } .backup-dialog { padding: 20px; } }
