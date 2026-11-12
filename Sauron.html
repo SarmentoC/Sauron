@@ -116,7 +116,23 @@
           Saúde
         </button>
         <button type="button" data-tab="memories" aria-pressed="false">
-          <span aria-hidden="true">▧</span> Memórias
+          <span aria-hidden="true">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="26"
+  height="26"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d="M12 7v14"/>
+  <path d="M3 18V5a1 1 0 0 1 1-1h3a5 5 0 0 1 5 5 5 5 0 0 1 5-5h3a1 1 0 0 1 1 1v13h-4a5 5 0 0 0-5 3 5 5 0 0 0-5-3H3z"/>
+</svg>
+</span> Memórias
         </button>
         <button type="button" data-tab="backup" aria-pressed="false">
           <span aria-hidden="true">⇩</span> Backup
@@ -712,7 +728,7 @@
       <header class="training-hero food-hero full">
         <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
 
-        <h1>O Banquete de Sauron</h1>
+        <h1>THE DARK LORD'S FEAST</h1>
 
         <div class="training-title-divider" aria-hidden="true">
           <span></span>
@@ -904,7 +920,7 @@
       >
         <header class="training-hero growth-hero full" aria-labelledby="growthTitle">
           <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
-          <h1 id="growthTitle">A Ascensão de Sauron</h1>
+          <h1 id="growthTitle">THE RISE OF SAURON</h1>
           <div class="training-title-divider" aria-hidden="true"><span></span></div>
           <p>"A great power shall rise."</p>
         </header>
@@ -987,7 +1003,7 @@
       <div class="view training-view" data-view="training" id="view-training" hidden>
         <header class="training-hero" aria-labelledby="trainingTitle">
           <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
-          <h1><span class="training-initial">T</span>reinos do <span class="training-initial">S</span>auron</h1>
+          <h1>FORGING THE DARK LORD</h1>
 
         <div class="training-title-divider" aria-hidden="true">
         <span></span>
@@ -1269,7 +1285,7 @@
         <!-- Banner Saúde: partilha o estilo da banner de Treinos -->
         <header class="training-hero health-hero full" aria-labelledby="healthTitle">
           <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
-          <h1 id="healthTitle">Sauron, O Imortal</h1>
+          <h1 id="healthTitle">Sauron, The Immortal</h1>
           <div class="training-title-divider" aria-hidden="true"><span></span></div>
           <p>"Even the Dark Lord must guard his strength."</p>
         </header>
@@ -1812,11 +1828,17 @@
       </div>
 
       <div class="view memories-view" data-view="memories" id="view-memories" hidden>
-        <section class="memories-hero">
-          <p class="memories-eyebrow">O livro de Sauron</p>
-          <h2>Pequenos dias. Grandes memórias.</h2>
-          <p>Uma semana de cada vez: o crescimento, os acontecimentos e os momentos que ficam.</p>
-        </section>
+        <header class="training-hero memories-hero" aria-labelledby="memoriesTitle">
+  <img src="./sauron-eye.png" class="training-hero-eye" alt="" aria-hidden="true">
+
+  <h1 id="memoriesTitle">Lord of the Rings's Legacy</h1>
+
+  <div class="training-title-divider" aria-hidden="true">
+    <span></span>
+  </div>
+
+  <p>"Even the smallest moments shall endure through the ages."</p>
+</header>
         <p class="hint memories-storage-note">As fotos e vídeos ficam guardados neste navegador e dispositivo. Usa o separador Backup para exportar uma cópia completa. A sincronização automática ainda não está disponível.</p>
         <div class="memories-layout">
           <aside class="card memories-sidebar" aria-label="Escolher semana">
@@ -1857,7 +1879,7 @@
 
       <div class="view backup-view" data-view="backup" id="view-backup" hidden>
         <section class="card backup-intro">
-          <p class="backup-eyebrow">A história de Sauron, contigo</p>
+          <p class="backup-eyebrow">A história de Sauron</p>
           <h2>Guardar e transferir os dados</h2>
           <p>Um único ZIP com os registos da app, as notas e os originais das fotografias e vídeos adicionados às Memórias.</p>
           <p class="hint">Para passar da app local para a online: descarrega o backup na versão que tem os dados certos e importa esse mesmo ZIP na outra versão.</p>

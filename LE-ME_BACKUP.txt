@@ -1,0 +1,103 @@
+SAURON — BACKUP COMPLETO
+
+1. INSTALAR NA APP LOCAL
+
+Extrai o ZIP do código para a pasta onde já está a app, substituindo:
+- Sauron.html
+- Sauron.css
+- Sauron.js
+
+Acrescenta:
+- SauronBackup.js
+- vendor/fflate.js
+- vendor/fflate-LICENSE.txt
+
+index.html é uma cópia sem alterações do que enviaste.
+Mantém o teu ficheiro SauronMemorias.js e todas as imagens existentes.
+SauronMemorias.js não veio nos anexos e não foi substituído neste pacote.
+A estrutura da pasta deve ficar assim:
+Sauron.html
+Sauron.css
+Sauron.js
+SauronMemorias.js (o teu ficheiro atual)
+SauronBackup.js
+index.html
+vendor/fflate.js
+vendor/fflate-LICENSE.txt
+(as imagens que já tens)
+
+Abre a app no mesmo endereço e navegador onde os registos estão certos.
+Se a usas como ficheiro local, mantém a pasta e o nome Sauron.html.
+Não mudes para outro navegador ou outro endereço antes de exportar os dados.
+A instalação do código não inclui os teus registos: estes estão no navegador.
+
+2. DESCARREGAR OS DADOS ATUAIS
+
+Na app LOCAL que tem os dados completos, abre Backup.
+Clica em Descarregar backup completo.
+Guarda o ZIP numa pasta de cópias de segurança fora do repositório Git.
+Não é o mesmo ZIP do código que recebeste neste chat.
+O ZIP dos dados chama-se Sauron_Backup_Completo_DATA_HORA.zip.
+Confirma que o download terminou.
+
+Inclui todos os registos que a app guarda: pesos, saúde (incluindo identidade,
+genética e referências a documentos), alimentos, planos, snacks, treinos,
+água, definições, notas, e os originais de fotos/vídeos das Memórias.
+Não inclui as imagens fixas do design nem ficheiros que estejam apenas
+em pastas do computador sem terem sido adicionados às Memórias.
+Os documentos de saúde continuam a ser referências/links, tal como na app.
+Esta versão suporta até 512 MB de multimédia por backup.
+
+3. PUBLICAR A FUNCIONALIDADE
+
+Depois de instalar os ficheiros na pasta do projeto, podes executar no terminal:
+
+git add Sauron.html Sauron.css Sauron.js SauronBackup.js vendor/fflate.js vendor/fflate-LICENSE.txt
+git commit -m "Adicionar backup completo da app"
+git push origin main
+
+Confirma a publicação a verde em GitHub > Actions.
+Não faças git add . para este passo: os ZIPs de dados e vídeos não precisam
+nem devem ser publicados juntamente com o código para fazer a transferência.
+Atualiza a app online com Ctrl+F5 para veres o novo separador Backup.
+
+4. PASSAR OS DADOS PARA A APP ONLINE
+
+Fecha os outros separadores da versão online para evitar que guardem dados antigos.
+Abre https://sarmentoc.github.io/Sauron/Sauron.html
+Abre Backup > Escolher backup ZIP.
+Seleciona o ZIP de DADOS que descarregaste da app local.
+Confere as contagens na pré-visualização e confirma a substituição.
+A página recarrega para apresentar os dados importados.
+
+A importação SUBSTITUI os dados da versão de destino; não junta duas versões.
+Antes de substituir, guarda uma cópia anterior nesse mesmo navegador.
+Se precisares, usa Backup > Recuperar antes da última importação.
+Se falta espaço para guardar a cópia anterior, a importação é interrompida.
+Esta cópia local não substitui um ZIP guardado fora do navegador.
+
+5. UTILIZAÇÃO A PARTIR DE AGORA
+
+O backup permite transferências manuais. Ainda NÃO existe sincronização automática.
+Escolhe a versão que tem os registos mais recentes como origem da transferência.
+Evita acrescentar dados diferentes nas duas versões antes de importar.
+Descarrega novos backups regularmente e mantém os ZIPs anteriores.
+A biblioteca ZIP é distribuída localmente na pasta vendor (licença MIT incluída).
+Os dados e fotografias não são enviados para um serviço externo pelo backup.
+
+ALTERAÇÕES DE CÓDIGO
+
+HTML: separador Backup, pré-visualização, controlos de recuperação e scripts novos.
+CSS: estilos responsivos do separador e da janela de confirmação.
+JS principal: permite abrir o separador Backup e chama a respetiva atualização.
+SauronBackup.js: exportação/importação ZIP, verificação SHA-256 do manifesto
+e de cada ficheiro multimédia, validação, recuperação e tratamento de erros.
+Mantidas as funcionalidades anteriores e o comportamento dos dados existentes.
+A exportação JSON de Saúde continua disponível e contém apenas saúde.
+
+VALIDAÇÃO
+
+Testado em Chromium em localhost, file:// e dois endereços distintos.
+Verificadas transferência de dados e bytes de fotos/vídeos, cancelamento,
+ficheiros corrompidos/truncados, erros simulados de espaço/escrita, recuperação,
+recarregamento e apresentação móvel.

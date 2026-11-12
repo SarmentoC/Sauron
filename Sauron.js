@@ -18,7 +18,7 @@
         calcium: null,
         phosphorus: null,
         status: "estimated",
-        url: null
+        url: "https://goldpet.pt/alimentos-humidos/22411-30932-pro-plan-healthy-start-kitten-alimento-em-molho-para-gatinho-peru.html#/quantidade-26_x_85_g"
       },
       {
         id: "wet-carny",
