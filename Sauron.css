@@ -5033,6 +5033,50 @@ details.gen-summary[open] .gen-summary-toggle { color: var(--tx); border-color: 
   margin-top: 0;
 }
 
+/* SIDEBAR — BOTÕES MAIS COMPACTOS */
+@media (min-width: 761px) {
+
+  .royal-nav {
+    gap: 2px;
+    padding: 4px 10px;
+  }
+
+  .royal-nav button {
+    min-height: 0;
+    height: 54px;
+    padding: 6px 12px;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .royal-nav button > span {
+    width: 22px;
+    font-size: 19px;
+  }
+
+  .royal-nav button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .royal-sidebar-scene {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+
+  .royal-live {
+    display: block;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 8px 6px 12px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
 
 /* MEMÓRIAS — relatórios semanais e galeria */
 .memories-view { display: block; }
