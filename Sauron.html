@@ -2,6 +2,17 @@
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
+  <script>
+  (() => {
+    const agent = navigator.userAgent;
+    const isPhone = /iPhone|iPod/i.test(agent) ||
+      (/Android/i.test(agent) && /Mobile/i.test(agent));
+
+    if (isPhone) {
+      window.location.replace("./mobile/");
+    }
+  })();
+</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Sauron · Nutrição e Crescimento</title>
